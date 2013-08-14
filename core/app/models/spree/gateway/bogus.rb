@@ -9,6 +9,8 @@ module Spree
 
     attr_accessor :test
 
+    attr_acessible :name, :description, :environment, :active
+
     def provider_class
       self.class
     end
