@@ -29,8 +29,11 @@ module Spree
       end
 
       def destroy
+        # XXX: Prod is tossing a ReadOnlyRecord exception
         @product = Product.where(permalink: params[:id] ).first
-        @product.try :destroy
+        if @product
+          Product.destroy(@product.id)
+        end
 
         flash[:success] = Spree.t('notice_messages.product_deleted')
 
